@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>非接触端末操作システム（仮）ショートカット設定画面</title>
+    <script type="text/javascript" src="eel.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <!--h1フォント-->
+    <link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Reggae+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><!--ボタンのフォント-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Kaisei+Opti:wght@700&family=Rampart+One&family=Reggae+One&family=Stoke:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><!--p1,p2のフォント-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Kaisei+Opti:wght@700&family=Rampart+One&family=Reggae+One&family=Sawarabi+Mincho&family=Stoke:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1>ショートカット設定画面</h1>
+    <p id="p1">設定したいポーズを選択してください</p>
+    <p><img src="data/pose1.png" width="120" height="120" id="image" alt="ポーズ画像"></p>
+
+    <!-- ドロップダウンリストを作成。選択された時"imgChange"関数を呼び出す -->
+    <select id="pose" onchange="imgChange(this)">
+        <option value="0">ポーズ１</option>
+        <option value="1">ポーズ2</option>
+        <option value="2">ポーズ3</option>
+        <option value="3">ポーズ4</option>
+        <option value="4">ポーズ5</option>
+    </select>
+
+    <select id="sc" onchange="scChange(this)">
+        <option value="0">コピー</option>
+        <option value="1">ペースト</option>
+        <option value="2">ショートカット3</option>
+        <option value="3">ショートカット4</option>
+        <option value="4">ショートカット5</option>
+    </select>
+
+    <div id="accept_button">
+        <p id="scconf">Apply</p>
+    </div>
+
+        <!--坪内↓-->
+        <div class="space">
+  <div class="stars">
+    <span class="star anim"></span>
+    <span class="star anim"></span>
+    <span class="star anim"></span>
+    <span class="star anim"></span>
+    <span class="star anim"></span>
+    <span class="star anim"></span>
+    <span class="star anim"></span>
+    <span class="star anim"></span>
+    <span class="star anim"></span>
+    <span class="star anim"></span>
+    <span class="star anim"></span>
+    <span class="star anim"></span>
+  </div>
+</div>
+    <!--坪内↑-->
+
+
+
+    <script type="text/javascript">
+        let array1;
+        //sc_conf_reader関数から環境設定ファイルの内容を受け取る
+        async function test() {
+            array1 = await eel.sc_conf_reader()();
+            eel.priri(array1);
+        }
+        test();
+
+        let ps_select;
+        //  選択中のポーズを取得＆画像を該当のポーズに書き換え
+        function imgChange(parts){
+            ps_select = parts.options[parts.selectedIndex].value;
+
+            if(ps_select == 0) image.src = "data/pose1.png";
+            if(ps_select == 1) image.src = "data/pose2.png";
+            if(ps_select == 2) image.src = "data/pose3.png";
+            if(ps_select == 3) image.src = "data/pose4.png";
+            if(ps_select == 4) image.src = "data/pose5.png";
+            eel.priri(Number(ps_select));
+        }
+
+        let sc_select;
+        //  選択中のショートカットを取得
+        function scChange(parts){
+            sc_select = parts.options[parts.selectedIndex].value;
+            eel.priri(Number(sc_select) + 1);
+        }
+
+        //  選択中のポーズに選択中のショートカットを設定し、pythonの関数に渡す
+        document.getElementById("accept_button").onclick = async function accept_click() {
+            //選択中のポーズに選択中のショートカットを設定
+            array1[ps_select] = (Number(sc_select) + 1).toString();
+            let val = await eel.sc_conf_write(array1)();
+            eel.priri(array1);
+        }
+
+    </script>
+
+</body>
+</html>

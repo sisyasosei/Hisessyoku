@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>非接触端末操作システム（仮）</title>
+    <script type="text/javascript" src="eel.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <!--h1フォント-->
+    <link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Reggae+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><!--ボタンのフォント-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Kaisei+Opti:wght@700&family=Rampart+One&family=Reggae+One&family=Stoke:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><!--p1,p2のフォント-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Kaisei+Opti:wght@700&family=Rampart+One&family=Reggae+One&family=Sawarabi+Mincho&family=Stoke:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1>ようこそ非接触端末操作システム（仮）へ</h1>
+    <p id="p1">本アプリケーションは非接触で端末を操作します。システムがカメラを通しあなたの手を認識し、指定されたアクションを実行します。</p>
+    <p id="p2">下のボタンから任意の操作を開始してください</p>
+
+    <div id="boot_button">
+        <p id="boot">Start-up</p>
+    </div>
+    <div id="stop_button">
+        <p id="stop">Stop</p>
+    </div>
+    <div id="scconf_button">
+        <!--<p id="scconf">Shortcut settings</p>-->
+        <p id="scconf">Shortcut<br></br>settings</p>
+    </div>
+    <!--坪内↓-->
+    <!--宇宙①↓-->
+    <div class="space">
+        <div class="stars">
+            <span class="star anim"></span>
+            <span class="star anim"></span>
+            <span class="star anim"></span>
+            <span class="star anim"></span>
+            <span class="star anim"></span>
+            <span class="star anim"></span>
+            <span class="star anim"></span>
+            <span class="star anim"></span>
+            <span class="star anim"></span>
+            <span class="star anim"></span>
+            <span class="star anim"></span>
+            <span class="star anim"></span>
+        </div>
+    </div>
+    <!--宇宙①↑-->
+    <!--坪内↑-->
+    <script type="text/javascript">
+        //  ボタンが押下された際の関数
+        document.getElementById("boot_button").onclick = function boot_click() {
+            eel.boot_app();
+        }
+        document.getElementById("stop_button").onclick = function stop_click() {
+            eel.stop_app();
+        }
+        document.getElementById("scconf_button").onclick = function stop_click() {
+            eel.scconf_app();
+        }
+
+    </script>
+</body>
+</html>
